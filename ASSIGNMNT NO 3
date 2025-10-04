@@ -1,1 +1,51 @@
+1. Write a SQL query to create Employee & Department table with specific columns and 
+constraints.(Note- Create Table, insert data as per your Choice) 
+=====================================================================================
+mysql> create table employee1(
+    -> emp_id int,
+    -> ename varchar(50),
+    -> addr varchar(20),
+    -> salary int,
+    -> primary key(emp_id)
+    -> );
+Query OK, 0 rows affected (0.04 sec)
+
+mysql> insert into employee1 (emp_id,ename,addr,salary)
+    -> values(101,'vipul','navimumbai',40000),
+    -> (102,'shilbhushan','mumbai',50000),
+    -> (103,'himanshu','shahada',30000),
+    -> (104,'shilbhushan','mumbai',50000);
+Query OK, 4 rows affected (0.02 sec)
+Records: 4  Duplicates: 0  Warnings: 0
+
+mysql> select * from employee1;
++--------+-------------+------------+--------+
+| emp_id | ename       | addr       | salary |
++--------+-------------+------------+--------+
+|    101 | vipul       | navimumbai |  40000 |
+|    102 | shilbhushan | mumbai     |  50000 |
+|    103 | himanshu    | shahada    |  30000 |
+|    104 | shilbhushan | mumbai     |  50000 |
++--------+-------------+------------+--------+
+4 rows in set (0.00 sec)
+
+mysql> select SUM(salary) from employee1;
++-------------+
+| SUM(salary) |
++-------------+
+|      170000 |
++-------------+
+1 row in set (0.02 sec)
+2. Write a SQL query to add any new column to an existing table.
+mysql> select * from employee1;
++--------+-------------+------------+--------+----------+
+| emp_id | ename       | addr       | salary | DOB      |
++--------+-------------+------------+--------+----------+
+|    101 | vipul       | navimumbai |  40000 | 4082002  |
+|    102 | shilbhushan | mumbai     |  50000 | 4082000  |
+|    103 | himanshu    | shahada    |  30000 | 15082001 |
+|    104 | shilbhushan | mumbai     |  50000 | 16071990 |
++--------+-------------+------------+--------+----------+
+4 rows in set (0.00 sec)
+
 
