@@ -36,6 +36,8 @@ mysql> select SUM(salary) from employee1;
 |      170000 |
 +-------------+
 1 row in set (0.02 sec)
+
+=====================================================================
 2. Write a SQL query to add any new column to an existing table.
 mysql> select * from employee1;
 +--------+-------------+------------+--------+----------+
@@ -48,4 +50,216 @@ mysql> select * from employee1;
 +--------+-------------+------------+--------+----------+
 4 rows in set (0.00 sec)
 
+3. Write a SQL query to insert multiple records (At least 5) into a table in a single operation.
+mysql> insert into empl(emp_id,ename,esalary,email)
+    -> values(101,'himanshu',50000,'@gamil'),
+    -> (102,'ravi',40000,'@gamil'),
+    -> (103,'kavi',50000,'@gamil'),
+    -> (104,'virat',100000,'@gamil'),
+    -> (105,'hardik',90000,'@gamil');
+Query OK, 5 rows affected (0.01 sec)
+Records: 5  Duplicates: 0  Warnings: 0
+mysql> select * from empl;
++--------+----------+---------+--------+
+| emp_id | ename    | esalary | email  |
++--------+----------+---------+--------+
+|    101 | himanshu |   50000 | @gamil |
+|    102 | ravi     |   40000 | @gamil |
+|    103 | kavi     |   50000 | @gamil |
+|    104 | virat    |  100000 | @gamil |
+|    105 | hardik   |   90000 | @gamil |
++--------+----------+---------+--------+
+5 rows in set (0.00 sec)
+=======================================================================
+4. Write a SQL query to delete all records from a table.
 
+
+
+
+
+
+5. Write a SQL query to update salary records from a table where id = 5.
+mysql> update empl set esalary= 200000 where emp_id = 105;
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from empl;
++--------+----------+---------+--------+
+| emp_id | ename    | esalary | email  |
++--------+----------+---------+--------+
+|    101 | himanshu |   50000 | @gamil |
+|    102 | ravi     |   40000 | @gamil |
+|    103 | kavi     |   50000 | @gamil |
+|    104 | virat    |  100000 | @gamil |
+|    105 | hardik   |  200000 | @gamil |
++--------+----------+---------+--------+
+5 rows in set (0.00 sec).
+
+6. Write a query to grant SELECT privilege on the Emp table to user readonly_user.
+mysql> GRANT SELECT ON employee.empl TO 'dumy'@'localhost';
+Query OK, 0 rows affected (0.05 sec)
+=================================================================================
+7. Write a query to revoke INSERT privilege on the Emp table from user temp_user.
+mysql> revoke insert on employee.empl from "dumy"@"localhost";
+Query OK, 0 rows affected (0.02 sec)
+=================================================================================
+8.8. Write a query to insert a new employee into the Emp table and commit the transaction. 
+mysql> insert into empl values(106,'hanuman.j','60000','h@gmail');
+Query OK, 1 row affected (0.02 sec)
+
+mysql> commit;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from empl;
++--------+-----------+---------+---------+
+| emp_id | ename     | esalary | email   |
++--------+-----------+---------+---------+
+|    101 | himanshu  |   50000 | @gamil  |
+|    102 | ravi      |   40000 | @gamil  |
+|    103 | kavi      |   50000 | @gamil  |
+|    104 | virat     |  100000 | @gamil  |
+|    105 | hardik    |  200000 | @gamil  |
+|    106 | hanuman.j |   60000 | h@gmail |
++--------+-----------+---------+---------+
+6 rows in set (0.00 sec)
+=============================================================================
+9. Write a query to update the Salary of an employee with EmpID = 101 and commit the 
+transaction. 
+mysql> update empl set esalary = 70000 where emp_id = 101;
+Query OK, 1 row affected (0.02 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from empl;
++--------+-----------+---------+---------+
+| emp_id | ename     | esalary | email   |
++--------+-----------+---------+---------+
+|    101 | himanshu  |   70000 | @gamil  |
+|    102 | ravi      |   40000 | @gamil  |
+|    103 | kavi      |   50000 | @gamil  |
+|    104 | virat     |  100000 | @gamil  |
+|    105 | hardik    |  200000 | @gamil  |
+|    106 | hanuman.j |   60000 | h@gmail |
++--------+-----------+---------+---------+
+6 rows in set (0.00 sec)
+===================================================================================
+10. Write a query to set a SAVEPOINT before updating the DeptID of an employee. 
+
+mysql> insert into empl values(107,'rohit',20000,'r@gmail');
+Query OK, 1 row affected (0.00 sec)
+
+mysql> savepoint s1;
+Query OK, 0 rows affected (0.00 sec)
+
+mysql> select * from empl;
++--------+-----------+---------+---------+
+| emp_id | ename     | esalary | email   |
++--------+-----------+---------+---------+
+|    101 | himanshu  |   70000 | @gamil  |
+|    102 | ravi      |   40000 | @gamil  |
+|    103 | kavi      |   50000 | @gamil  |
+|    104 | virat     |  100000 | @gamil  |
+|    105 | hardik    |  200000 | @gamil  |
+|    106 | hanuman.j |   60000 | h@gmail |
+|    107 | rohit     |   20000 | r@gmail |
++--------+-----------+---------+---------+
+7 rows in set (0.00 sec)
+
+mysql> alter table empl add Dep_id int;
+Query OK, 0 rows affected (0.04 sec)
+Records: 0  Duplicates: 0  Warnings: 0
+11. Write a query to rollback to the previously created SAVEPOINT.
+mysql> select * from empl;
++--------+-----------+---------+---------+--------+
+| emp_id | ename     | esalary | email   | Dep_id |
++--------+-----------+---------+---------+--------+
+|    101 | himanshu  |   70000 | @gamil  |   NULL |
+|    102 | ravi      |   40000 | @gamil  |   NULL |
+|    103 | kavi      |   50000 | @gamil  |   NULL |
+|    104 | virat     |  100000 | @gamil  |   NULL |
+|    105 | hardik    |  200000 | @gamil  |   NULL |
+|    106 | hanuman.j |   60000 | h@gmail |   NULL |
+|    107 | rohit     |   20000 | r@gmail |   NULL |
+|    108 | harshal   |   10000 | @gamil  |   NULL |
++--------+-----------+---------+---------+--------+
+8 rows in set (0.00 sec)
+
+mysql> rollback;
+Query OK, 0 rows affected (0.01 sec)
+
+mysql> select * from empl;
++--------+-----------+---------+---------+--------+
+| emp_id | ename     | esalary | email   | Dep_id |
++--------+-----------+---------+---------+--------+
+|    101 | himanshu  |   70000 | @gamil  |   NULL |
+|    102 | ravi      |   40000 | @gamil  |   NULL |
+|    103 | kavi      |   50000 | @gamil  |   NULL |
+|    104 | virat     |  100000 | @gamil  |   NULL |
+|    105 | hardik    |  200000 | @gamil  |   NULL |
+|    106 | hanuman.j |   60000 | h@gmail |   NULL |
+|    107 | rohit     |   20000 | r@gmail |   NULL |
++--------+-----------+---------+---------+--------+
+7 rows in set (0.00 sec)
+=============================================================================
+12. Write a query to truncate all data from the Emp table.
+
+
+
+=============================================================================
+13. Write a query to list all employees whose salary is greater than 50,000.
+mysql> select * from empl where esalary>50000;
++--------+-----------+---------+---------+--------+
+| emp_id | ename     | esalary | email   | Dep_id |
++--------+-----------+---------+---------+--------+
+|    101 | himanshu  |   70000 | @gamil  |   NULL |
+|    104 | virat     |  100000 | @gamil  |   NULL |
+|    105 | hardik    |  200000 | @gamil  |   NULL |
+|    106 | hanuman.j |   60000 | h@gmail |   NULL |
++--------+-----------+---------+---------+--------+
+4 rows in set (0.00 sec)
+14. Write a query to increase the salary of all employees in DeptID = 10 by 10%. 
+mysql> UPDATE empl SET esalary = esalary * 1.10 WHERE emp_id = 110;
+Query OK, 1 row affected (0.00 sec)
+Rows matched: 1  Changed: 1  Warnings: 0
+
+mysql> select * from empl;
++--------+--------------+---------+------------------+--------+
+| emp_id | ename        | esalary | email            | Dep_id |
++--------+--------------+---------+------------------+--------+
+|    101 | himanshu     |   70000 | @gamil           |   NULL |
+|    102 | ravi         |   40000 | @gamil           |   NULL |
+|    103 | kavi         |   50000 | @gamil           |   NULL |
+|    104 | virat        |  100000 | @gamil           |   NULL |
+|    105 | hardik       |  200000 | @gamil           |   NULL |
+|    106 | hanuman.j    |   60000 | h@gmail          |   NULL |
+|    107 | rohit        |   20000 | r@gmail          |   NULL |
+|    108 | Laura Evans  |   91000 | laura.evans@.com |     40 |
+|    109 | Robert Hall  |   78000 | robert.ha@com    |     20 |
+|    110 | Jessica King |   93500 | jess.com         |     40 |
+|    111 | Susan Clark  |   88000 | susan.clark@.com |     30 |
++--------+--------------+---------+------------------+--------+
+11 rows in set (0.00 sec)
+=========================================================================
+15. Write a query to count the total number of employees in each department. 
+mysql> select count(emp_id) from empl;
++---------------+
+| count(emp_id) |
++---------------+
+|            11 |
++---------------+
+1 row in set (0.04 sec)
+==========================================================================================
+16. Write a query to list departments that have no employees. & create a view for those 
+salespeople who belong to the city of Mumbai.
+
+
+==========================================================================================
+17. Write a query to display the highest salary among all employees. 
+mysql> select max(esalary) from empl;
++--------------+
+| max(esalary) |
++--------------+
+|       200000 |
++--------------+
+1 row in set (0.02 sec)
+=====================================================================================
+18. Write a query to display the 2nd highest salary among all employees.
