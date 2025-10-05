@@ -1,0 +1,42 @@
+1. Write a query to calculate the total salary of all employees. 
+mysql> select sum(empsalary) from employees;
++----------------+
+| sum(empsalary) |
++----------------+
+|      553001.50 |
++----------------+
+1 row in set (0.01 sec)
+========================================================================================
+2. Write a query to find the average salary of employees in each department using GROUP 
+BY.
+mysql> select e.empname as empname,avg(empsalary) as avg_sal from employees e inner join depart d on e.empid=d.empid group by e.empname;
++----------------+---------------+
+| empname        | avg_sal       |
++----------------+---------------+
+| Emily Chen     |  72000.000000 |
+| Frank Miller   |  90000.500000 |
+| Grace Wilson   |  65000.000000 |
+| Henry Davis    | 105000.000000 |
+| Jack Rodriguez |  78000.000000 |
++----------------+---------------+
+5 rows in set (0.00 sec)
+
+3. Write a query to count the total number of employees in each department.
+mysql> select e.empname as employee_name,count(*) as Employee_count from employees e inner join depart d on e.empid=d.empid group by e.empname;
++----------------+----------------+
+| employee_name  | Employee_count |
++----------------+----------------+
+| Emily Chen     |              1 |
+| Frank Miller   |              1 |
+| Grace Wilson   |              1 |
+| Henry Davis    |              1 |
+| Jack Rodriguez |              1 |
++----------------+----------------+
+5 rows in set (0.00 sec)
+mysql> select count(empid) from employees;
++--------------+
+| count(empid) |
++--------------+
+|            7 |
++--------------+
+1 row in set (0.05 sec)
