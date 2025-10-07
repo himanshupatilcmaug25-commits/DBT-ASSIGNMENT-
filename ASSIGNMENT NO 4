@@ -40,3 +40,280 @@ mysql> select count(empid) from employees;
 |            7 |
 +--------------+
 1 row in set (0.05 sec)
+
+4. Write a query to display departments having more than 5 employees using HAVING 
+clause. 
+mysql>  select e.employee_id,d.department_name,max(d.department_id) from employees e inner join departments d on e.department_id=d.department_id group by e.employee_id having max(d.department_id)>5;
++-------------+-----------------+----------------------+
+| employee_id | department_name | max(d.department_id) |
++-------------+-----------------+----------------------+
+|        1007 | Engineering     |                   50 |
+|        1016 | Engineering     |                   50 |
+|        1004 | Finance         |                   40 |
+|        1017 | Finance         |                   40 |
+|        1003 | Human Resources |                   30 |
+|        1002 | IT              |                   20 |
+|        1005 | IT              |                   20 |
+|        1008 | IT              |                   20 |
+|        1009 | IT              |                   20 |
+|        1010 | IT              |                   20 |
+|        1001 | Sales           |                   10 |
+|        1006 | Sales           |                   10 |
+|        1011 | Sales           |                   10 |
+|        1012 | Sales           |                   10 |
+|        1013 | Sales           |                   10 |
+|        1014 | Sales           |                   10 |
+|        1015 | Sales           |                   10 |
++-------------+-----------------+----------------------+
+17 rows in set (0.00 sec)
+
+5. Write a query to list distinct department locations from the Dept table. 
+
+mysql> select distinct location from departments;
++---------------+
+| location      |
++---------------+
+| New York      |
+| San Francisco |
+| Chicago       |
+| London        |
+| Boston        |
+| Dallas        |
++---------------+
+6 rows in set (0.00 sec)
+=============================================================================================
+6. Write a query to display the highest salary among all employees.  Write a query to display 
+all total number of  employee in table. 
+mysql> select max(salary) from employees;
++-------------+
+| max(salary) |
++-------------+
+|   140000.00 |
++-------------+
+1 row in set (0.00 sec)
+===============================================================================================
+7. Write a query to find employees whose name starts with 'A' using LIKE operator. 
+mysql> select * from employees where first_name like'A%';
++-------------+------------+-----------+---------------------+----------+------------+---------------+
+| employee_id | first_name | last_name | email               | salary   | hire_date  | department_id |
++-------------+------------+-----------+---------------------+----------+------------+---------------+
+|        1001 | Alice      | Smith     | alice.s@company.com | 75000.00 | 2023-01-15 |            10 |
++-------------+------------+-----------+---------------------+----------+------------+---------------+
+1 row in set (0.00 sec)
+========================================================================================================
+8. Write a query to find employees whose name ends with 'n' using LIKE operator. 
+mysql> select * from employees where first_name like'%n';
++-------------+------------+-----------+----------------------+-----------+------------+---------------+
+| employee_id | first_name | last_name | email                | salary    | hire_date  | department_id |
++-------------+------------+-----------+----------------------+-----------+------------+---------------+
+|        1005 | Evan       | Wright    | evan.w@company.com   | 125000.00 | 2021-08-25 |            20 |
+|        1009 | Ian        | Miller    | ian.m@company.com    | 105000.00 | 2023-03-20 |            20 |
+|        1012 | Lauren     | Hall      | lauren.h@company.com |  85000.00 | 2022-10-15 |            10 |
+|        1017 | Quinn      | Adams     | quinn.a@company.com  | 100000.00 | 2024-05-01 |            40 |
++-------------+------------+-----------+----------------------+-----------+------------+---------------+
+4 rows in set (0.00 sec)
+
+=============================================================================================================
+9. Write a query to find employees whose name contains 'ra' using LIKE operator.
+mysql> select * from employees where last_name like'%ra%';
++-------------+------------+-----------+--------------------+----------+------------+---------------+
+| employee_id | first_name | last_name | email              | salary   | hire_date  | department_id |
++-------------+------------+-----------+--------------------+----------+------------+---------------+
+|        1013 | Mike       | Rivera    | mike.r@company.com | 90000.00 | 2023-07-28 |            10 |
++-------------+------------+-----------+--------------------+----------+------------+---------------+
+1 row in set (0.00 sec)
+================================================================================================================
+10. Write a query to display all employees sorted by their Salary in descending order. 
+
+mysql> select * from employees order by salary desc;
++-------------+------------+-----------+-----------------------+-----------+------------+---------------+
+| employee_id | first_name | last_name | email                 | salary    | hire_date  | department_id |
++-------------+------------+-----------+-----------------------+-----------+------------+---------------+
+|        1016 | Penny      | Turner    | penny.t@company.com   | 140000.00 | 2020-01-01 |            50 |
+|        1007 | George     | Harris    | george.h@company.com  | 130000.00 | 2020-07-01 |            50 |
+|        1005 | Evan       | Wright    | evan.w@company.com    | 125000.00 | 2021-08-25 |            20 |
+|        1010 | Jasmine    | Scott     | jasmine.s@company.com | 120000.00 | 2021-11-05 |            20 |
+|        1008 | Hannah     | Lee       | hannah.l@company.com  | 115000.00 | 2022-09-10 |            20 |
+|        1002 | Bob        | Johnson   | bob.j@company.com     | 110000.00 | 2022-05-20 |            20 |
+|        1009 | Ian        | Miller    | ian.m@company.com     | 105000.00 | 2023-03-20 |            20 |
+|        1017 | Quinn      | Adams     | quinn.a@company.com   | 100000.00 | 2024-05-01 |            40 |
+|        1004 | Diana      | Prince    | diana.p@company.com   |  95000.00 | 2024-02-10 |            40 |
+|        1013 | Mike       | Rivera    | mike.r@company.com    |  90000.00 | 2023-07-28 |            10 |
+|        1012 | Lauren     | Hall      | lauren.h@company.com  |  85000.00 | 2022-10-15 |            10 |
+|        1006 | Fiona      | Davis     | fiona.d@company.com   |  80000.00 | 2023-04-01 |            10 |
+|        1015 | Oscar      | King      | oscar.k@company.com   |  78000.00 | 2023-05-12 |            10 |
+|        1001 | Alice      | Smith     | alice.s@company.com   |  75000.00 | 2023-01-15 |            10 |
+|        1011 | Kyle       | Baker     | kyle.b@company.com    |  70000.00 | 2024-01-01 |            10 |
+|        1014 | Nancy      | Clark     | nancy.c@company.com   |  65000.00 | 2024-03-01 |            10 |
+|        1003 | Charlie    | Brown     | charlie.b@company.com |  60000.00 | 2023-11-01 |            30 |
++-------------+------------+-----------+-----------------------+-----------+------------+---------------+
+17 rows in set (0.01 sec)
+===================================================================================================================
+11. Write a query to display all employees sorted by DeptID ascending and then Salary 
+descending. 
+mysql> select e.salary,d.department_id from employees e inner join departments d  on e.department_id=d.department_id order by d.department_id ASC,e.salary desc;
++-----------+---------------+
+| salary    | department_id |
++-----------+---------------+
+|  90000.00 |            10 |
+|  85000.00 |            10 |
+|  80000.00 |            10 |
+|  78000.00 |            10 |
+|  75000.00 |            10 |
+|  70000.00 |            10 |
+|  65000.00 |            10 |
+| 125000.00 |            20 |
+| 120000.00 |            20 |
+| 115000.00 |            20 |
+| 110000.00 |            20 |
+| 105000.00 |            20 |
+|  60000.00 |            30 |
+| 100000.00 |            40 |
+|  95000.00 |            40 |
+| 140000.00 |            50 |
+| 130000.00 |            50 |
++-----------+---------------+
+17 rows in set (0.00 sec)
+===========================================================================================================================================================
+12. Write a query to find employees whose salary is between 30,000 and 60,000.
+mysql> select * from employees where salary between 30000 AND 60000;
++-------------+------------+-----------+-----------------------+----------+------------+---------------+
+| employee_id | first_name | last_name | email                 | salary   | hire_date  | department_id |
++-------------+------------+-----------+-----------------------+----------+------------+---------------+
+|        1003 | Charlie    | Brown     | charlie.b@company.com | 60000.00 | 2023-11-01 |            30 |
++-------------+------------+-----------+-----------------------+----------+------------+---------------+
+1 row in set (0.02 sec)
+=====================================================================================================================================
+13. Write a query to display all employees whose DeptID is in (10, 20, 30).
+mysql> select * from employees where department_id in (10,20,30);
++-------------+------------+-----------+-----------------------+-----------+------------+---------------+
+| employee_id | first_name | last_name | email                 | salary    | hire_date  | department_id |
++-------------+------------+-----------+-----------------------+-----------+------------+---------------+
+|        1001 | Alice      | Smith     | alice.s@company.com   |  75000.00 | 2023-01-15 |            10 |
+|        1002 | Bob        | Johnson   | bob.j@company.com     | 110000.00 | 2022-05-20 |            20 |
+|        1003 | Charlie    | Brown     | charlie.b@company.com |  60000.00 | 2023-11-01 |            30 |
+|        1005 | Evan       | Wright    | evan.w@company.com    | 125000.00 | 2021-08-25 |            20 |
+|        1006 | Fiona      | Davis     | fiona.d@company.com   |  80000.00 | 2023-04-01 |            10 |
+|        1008 | Hannah     | Lee       | hannah.l@company.com  | 115000.00 | 2022-09-10 |            20 |
+|        1009 | Ian        | Miller    | ian.m@company.com     | 105000.00 | 2023-03-20 |            20 |
+|        1010 | Jasmine    | Scott     | jasmine.s@company.com | 120000.00 | 2021-11-05 |            20 |
+|        1011 | Kyle       | Baker     | kyle.b@company.com    |  70000.00 | 2024-01-01 |            10 |
+|        1012 | Lauren     | Hall      | lauren.h@company.com  |  85000.00 | 2022-10-15 |            10 |
+|        1013 | Mike       | Rivera    | mike.r@company.com    |  90000.00 | 2023-07-28 |            10 |
+|        1014 | Nancy      | Clark     | nancy.c@company.com   |  65000.00 | 2024-03-01 |            10 |
+|        1015 | Oscar      | King      | oscar.k@company.com   |  78000.00 | 2023-05-12 |            10 |
++-------------+------------+-----------+-----------------------+-----------+------------+---------------+
+13 rows in set (0.02 sec)
+===============================================================================================================================
+14. Write a query to display Min salary of employee .
+mysql> select min(salary) from employees;
++-------------+
+| min(salary) |
++-------------+
+|    60000.00 |
++-------------+
+1 row in set (0.01 sec)
+
+15. Write a query to display employees whose JoiningDate is between '2020-01-01' and 
+'2021-12-31'.
+
+mysql> select * from  employees where hire_date between '2020-01-01' and '2023-12-31';
++-------------+------------+-----------+-----------------------+-----------+------------+---------------+
+| employee_id | first_name | last_name | email                 | salary    | hire_date  | department_id |
++-------------+------------+-----------+-----------------------+-----------+------------+---------------+
+|        1001 | Alice      | Smith     | alice.s@company.com   |  75000.00 | 2023-01-15 |            10 |
+|        1002 | Bob        | Johnson   | bob.j@company.com     | 110000.00 | 2022-05-20 |            20 |
+|        1003 | Charlie    | Brown     | charlie.b@company.com |  60000.00 | 2023-11-01 |            30 |
+|        1005 | Evan       | Wright    | evan.w@company.com    | 125000.00 | 2021-08-25 |            20 |
+|        1006 | Fiona      | Davis     | fiona.d@company.com   |  80000.00 | 2023-04-01 |            10 |
+|        1007 | George     | Harris    | george.h@company.com  | 130000.00 | 2020-07-01 |            50 |
+|        1008 | Hannah     | Lee       | hannah.l@company.com  | 115000.00 | 2022-09-10 |            20 |
+|        1009 | Ian        | Miller    | ian.m@company.com     | 105000.00 | 2023-03-20 |            20 |
+|        1010 | Jasmine    | Scott     | jasmine.s@company.com | 120000.00 | 2021-11-05 |            20 |
+|        1012 | Lauren     | Hall      | lauren.h@company.com  |  85000.00 | 2022-10-15 |            10 |
+|        1013 | Mike       | Rivera    | mike.r@company.com    |  90000.00 | 2023-07-28 |            10 |
+|        1015 | Oscar      | King      | oscar.k@company.com   |  78000.00 | 2023-05-12 |            10 |
+|        1016 | Penny      | Turner    | penny.t@company.com   | 140000.00 | 2020-01-01 |            50 |
++-------------+------------+-----------+-----------------------+-----------+------------+---------------+
+13 rows in set (0.00 sec)
+
+16. Write a query to display employees whose Salary is NULL.
+mysql> select * from employees  where salary is null;
+Empty set (0.00 sec)
+
+17. Write a query to display employees whose Salary is NOT NULL.
+mysql> select * from employees  where salary is  not null;
++-------------+------------+-----------+-----------------------+-----------+------------+---------------+
+| employee_id | first_name | last_name | email                 | salary    | hire_date  | department_id |
++-------------+------------+-----------+-----------------------+-----------+------------+---------------+
+|        1001 | Alice      | Smith     | alice.s@company.com   |  75000.00 | 2023-01-15 |            10 |
+|        1002 | Bob        | Johnson   | bob.j@company.com     | 110000.00 | 2022-05-20 |            20 |
+|        1003 | Charlie    | Brown     | charlie.b@company.com |  60000.00 | 2023-11-01 |            30 |
+|        1004 | Diana      | Prince    | diana.p@company.com   |  95000.00 | 2024-02-10 |            40 |
+|        1005 | Evan       | Wright    | evan.w@company.com    | 125000.00 | 2021-08-25 |            20 |
+|        1006 | Fiona      | Davis     | fiona.d@company.com   |  80000.00 | 2023-04-01 |            10 |
+|        1007 | George     | Harris    | george.h@company.com  | 130000.00 | 2020-07-01 |            50 |
+|        1008 | Hannah     | Lee       | hannah.l@company.com  | 115000.00 | 2022-09-10 |            20 |
+|        1009 | Ian        | Miller    | ian.m@company.com     | 105000.00 | 2023-03-20 |            20 |
+|        1010 | Jasmine    | Scott     | jasmine.s@company.com | 120000.00 | 2021-11-05 |            20 |
+|        1011 | Kyle       | Baker     | kyle.b@company.com    |  70000.00 | 2024-01-01 |            10 |
+|        1012 | Lauren     | Hall      | lauren.h@company.com  |  85000.00 | 2022-10-15 |            10 |
+|        1013 | Mike       | Rivera    | mike.r@company.com    |  90000.00 | 2023-07-28 |            10 |
+|        1014 | Nancy      | Clark     | nancy.c@company.com   |  65000.00 | 2024-03-01 |            10 |
+|        1015 | Oscar      | King      | oscar.k@company.com   |  78000.00 | 2023-05-12 |            10 |
+|        1016 | Penny      | Turner    | penny.t@company.com   | 140000.00 | 2020-01-01 |            50 |
+|        1017 | Quinn      | Adams     | quinn.a@company.com   | 100000.00 | 2024-05-01 |            40 |
++-------------+------------+-----------+-----------------------+-----------+------------+---------------+
+17 rows in set (0.00 sec)
+
+
+18. Write a query to calculate the total salary per department, but only for departments 
+where total salary is greater than 1,00,000 (use HAVING).
+mysql> select d.department_name,sum(e.salary) from employees e inner join departments d on e.department_id=d.department_id group by d.department_name having sum(e.salary)>100000;
++-----------------+---------------+
+| department_name | sum(e.salary) |
++-----------------+---------------+
+| Sales           |     543000.00 |
+| IT              |     575000.00 |
+| Finance         |     195000.00 |
+| Engineering     |     270000.00 |
++-----------------+---------------+
+4 rows in set (0.00 sec)
+================================================================================================================================================================
+19. Write a query to display all distinct employee names.
+mysql> select distinct first_name from employees;
++------------+
+| first_name |
++------------+
+| Alice      |
+| Bob        |
+| Charlie    |
+| Diana      |
+| Evan       |
+| Fiona      |
+| George     |
+| Hannah     |
+| Ian        |
+| Jasmine    |
+| Kyle       |
+| Lauren     |
+| Mike       |
+| Nancy      |
+| Oscar      |
+| Penny      |
+| Quinn      |
++------------+
+17 rows in set (0.00 sec)
+20. Write a query to count the number of departments having the same location.
+
+mysql> select location,count(department_name) from departments group by location having count(location)>1;
++---------------+------------------------+
+| location      | count(department_name) |
++---------------+------------------------+
+| New York      |                      3 |
+| San Francisco |                      2 |
+| Chicago       |                      2 |
++---------------+------------------------+
+3 rows in set (0.00 sec)
+
+
