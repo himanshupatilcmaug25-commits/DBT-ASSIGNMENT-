@@ -204,3 +204,16 @@ mysql> select * From employees cross join employeeproject;
 +--------+------------+-----------+-----------+------------+---------+--------+---------+--------------+
 144 rows in set (0.06 sec)
 11.	Write a SQL query using a subquery to find all employees whose salary is greater than the average salary of all employees.
+sql> select emp_id,first_name,salary from employees where salary > (
+    -> select avg(salary) from employees);
++--------+------------+-----------+
+| emp_id | first_name | salary    |
++--------+------------+-----------+
+|   1001 | Alex       | 120000.00 |
+|   1003 | Caleb      | 140000.00 |
+|   1005 | Ethan      | 110000.00 |
+|   1007 | George     | 130000.00 |
+|   1009 | Isaac      | 155000.00 |
+|   1011 | Kevin      | 180000.00 |
++--------+------------+-----------+
+6 rows in set (0.01 sec)
