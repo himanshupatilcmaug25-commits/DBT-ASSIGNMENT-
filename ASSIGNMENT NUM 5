@@ -1,1 +1,15 @@
 
+mysql> CREATE TABLE EMPLOYEEBACKUP(
+    -> EMP_ID INT,
+    -> FIRST_NAME  VARCHAR(50),
+    -> LAST_NAME VARCHAR(50),
+    -> SALARY DECIMAL(10,2),
+    -> HIRE_DATE DATE,
+    -> DEPT_ID INT,
+    -> PRIMARY KEY (EMP_ID));
+Query OK, 0 rows affected (0.10 sec)
+
+mysql> INSERT INTO EMPLOYEEBACKUP SELECT * FROM EMPLOYEES;
+Query OK, 12 rows affected (0.05 sec)
+Records: 12  Duplicates: 0  Warnings: 0
+
